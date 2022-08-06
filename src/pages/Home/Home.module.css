@@ -119,6 +119,7 @@
 
 .welcomeMessageDiv > p {
   height: 100%;
+  word-wrap: break-word;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,6 +139,7 @@
 .userModuleDiv > p {
   height: 100%;
   display: flex;
+  word-wrap: break-word;
   justify-content: center;
   align-items: center;
   font-weight: 400;

@@ -2,16 +2,25 @@ import { useNavigate } from "react-router-dom";
 import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
 import { IoIosConstruct } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import styled from "./Home.module.css";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
-    if (!token) {
+    const tokenInLocalStorage = JSON.parse(
+      localStorage.getItem("@KenzieHub:token")
+    );
+    const userInLocalStorage = JSON.parse(
+      localStorage.getItem("@KenzieHub:user")
+    );
+
+    if (tokenInLocalStorage && userInLocalStorage) {
+      setUser(userInLocalStorage);
+    } else {
       navigate("/login", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,10 +58,10 @@ const Home = () => {
         <div className={styled.sectionContainer}>
           <section className={styled.devInfosSection}>
             <div className={styled.welcomeMessageDiv}>
-              <p>Hi, dear user!</p>
+              <p>Hi, {user.name}!</p>
             </div>
             <div className={styled.userModuleDiv}>
-              <p>Dev's current module</p>
+              <p>{user.course_module}</p>
             </div>
           </section>
         </div>

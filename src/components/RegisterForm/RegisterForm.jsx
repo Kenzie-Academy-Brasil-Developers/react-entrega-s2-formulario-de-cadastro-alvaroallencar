@@ -168,12 +168,12 @@ const RegisterForm = () => {
         <div className={styled.registerModuleDiv}>
           <label htmlFor="registerModule">Contact</label>
           <select name="" id="registerModule" {...register("course_module")}>
-            <option value="firstModule">First Module</option>
-            <option value="secondModule">Second Module</option>
-            <option value="thirdModule">Third Module</option>
-            <option value="fourthModule">Fourth Module</option>
-            <option value="fifthModule">Fifth Module</option>
-            <option value="sixthModule">Sixth Module</option>
+            <option value="First Module">First Module</option>
+            <option value="Second Module">Second Module</option>
+            <option value="Third Module">Third Module</option>
+            <option value="Fourth Module">Fourth Module</option>
+            <option value="Fifth Module">Fifth Module</option>
+            <option value="Sixth Module">Sixth Module</option>
           </select>
           <p className={styled.errorMessage}>{errors.course_module?.message}</p>
         </div>
