@@ -1,0 +1,128 @@
+.homePage {
+  width: 100%;
+  max-width: 800px;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 76px;
+  border-bottom: 2px solid rgba(var(--color-grey-3));
+}
+
+.headerContainer {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.imageBox {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoutDiv {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoutDiv button {
+  width: 67.49px;
+  height: 40.11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 16.2426px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 28px;
+  color: rgba(var(--color-grey-0));
+  background-color: rgba(var(--color-grey-3));
+  cursor: pointer;
+}
+
+.sectionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  border-bottom: 2px solid rgba(var(--color-grey-3));
+}
+
+.devInfosSection {
+  height: 118px;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.welcomeMessageDiv {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcomeMessageDiv > p {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: rgba(var(--color-grey-0));
+}
+
+.userModuleDiv {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userModuleDiv > p {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  color: rgba(var(--color-grey-1));
+}
+
+.userTechInfoMain {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.userTechInfoMain > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: rgba(var(--color-grey-0));
+}
