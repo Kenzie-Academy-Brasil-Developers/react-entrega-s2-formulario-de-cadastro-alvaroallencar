@@ -55,18 +55,24 @@ const GlobalStyle = createGlobalStyle`
     footer, header, hgroup, menu, nav, section {
         display: block;
     }
-/* 
+
     body {
-        line-height: 1;
-        overflow-y: scroll;
-    } */
+        /* line-height: 1;
+        overflow-y: scroll; */
+        overflow-x: hidden;
+    }
+
+    .root {
+        background-color: rgba(var(--color-grey-2), 1);
+    }
+
 
     body::-webkit-scrollbar {
         width: 10px;
     }
 
     body::-webkit-scrollbar-thumb {
-        background-color: rgba(var(--color-grey-50), 1);
+        background-color: rgba(var(--color-grey-2), 1);
         border-radius: 10px;
     }
 

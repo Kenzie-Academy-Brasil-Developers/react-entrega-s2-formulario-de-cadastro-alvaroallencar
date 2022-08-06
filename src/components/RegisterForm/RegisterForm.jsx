@@ -1,10 +1,15 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
+
+import apiRequests from "../../services/apiRequests";
 
 import styled from "./RegisterForm.module.css";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+
   const formSchema = yup.object().shape({
     name: yup.string().trim().required("Name required"),
     email: yup
@@ -41,17 +46,22 @@ const RegisterForm = () => {
 
   const onSubmitFunction = (formData) => {
     console.log(formData);
+    apiRequests
+      .post("/users", formData)
+      .then((res) => {
+        if (res.data.id) {
+          console.log(res.data);
+          navigate("/login", { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
   };
-
-//   const onClickLoginButton = () => {
-//     console.log("Register");
-//   };
 
   return (
     <>
       <div className={styled.titleBox}>
         <h2>Register</h2>
-        <p>Rápido e grátis, vamos nessa!</p>
+        <p>Fast and free, let's go!</p>
       </div>
       <form
         className={styled.registerForm}

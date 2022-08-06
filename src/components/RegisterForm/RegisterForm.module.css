@@ -17,7 +17,7 @@
 
 .titleBox > p {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 12.182px;
   line-height: 22px;
   color: rgba(var(--color-grey-1));
 }
@@ -126,5 +126,5 @@
 
 .errorMessage {
   font-size: 11px;
-  color: rgba(var(--color-primary-focus));
+  color: rgba(var(--color-primary-focus), 1);
 }

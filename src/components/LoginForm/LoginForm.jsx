@@ -1,21 +1,25 @@
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { BiShow, BiHide } from "react-icons/bi";
+
+import apiRequests from "../../services/apiRequests";
 
 import styled from "./LoginForm.module.css";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [inputType, setInputType] = useState("password");
+  const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
     email: yup
       .string()
       .trim()
       .required("Email required")
-      .email("Email inválido"),
+      .email("Invalid email"),
     password: yup.string().trim().required("Password required"),
   });
 
@@ -27,10 +31,6 @@ const LoginForm = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = (formData) => {
-    console.log(formData);
-  };
-
   const displayPassword = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
@@ -41,6 +41,27 @@ const LoginForm = () => {
     e.preventDefault();
     setShowPassword(!showPassword);
     setInputType("password");
+  };
+
+  const onSubmitFunction = (formData) => {
+    console.log(formData);
+    apiRequests
+      .post("/sessions", formData)
+      .then((res) => {
+        if (res.data.token) {
+          console.log(res.data);
+          localStorage.setItem(
+            "@KenzieHub:user",
+            JSON.stringify(res.data.user)
+          );
+          localStorage.setItem(
+            "@KenzieHub:token",
+            JSON.stringify(res.data.token)
+          );
+          navigate("/home", { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -58,7 +79,13 @@ const LoginForm = () => {
             id="loginEmail"
             {...register("email")}
           />
-          <p>{errors.email?.message}</p>
+          {errors.email?.message ? (
+            <p className={styled.errorMessage}>{errors.email?.message}</p>
+          ) : (
+            <p className={styled.errorMessage}>
+              <br />
+            </p>
+          )}
         </div>
         <div className={styled.passwordDiv}>
           <label htmlFor="loginPassword">Password</label>
@@ -79,7 +106,13 @@ const LoginForm = () => {
               </button>
             )}
           </div>
-          <p>{errors.password?.message}</p>
+          {errors.password?.message ? (
+            <p className={styled.errorMessage}>{errors.password?.message}</p>
+          ) : (
+            <p className={styled.errorMessage}>
+              <br />
+            </p>
+          )}
         </div>
         <button type="submit">Login</button>
       </form>
