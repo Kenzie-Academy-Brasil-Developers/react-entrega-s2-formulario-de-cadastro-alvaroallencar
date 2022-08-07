@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import apiRequests from "../../services/apiRequests";
 
@@ -49,6 +50,16 @@ const LoginForm = () => {
          .post("/sessions", formData)
          .then((res) => {
             if (res.data.token) {
+               toast.success(`Welcome ${res.data.user.name}!`, {
+                  theme: "dark",
+                  position: "bottom-right",
+                  autoClose: 2500,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+               });
                console.log(res.data);
                localStorage.setItem(
                   "@KenzieHub:user",
@@ -65,55 +76,57 @@ const LoginForm = () => {
    };
 
    return (
-      <FormDiv>
-         <h2>Login</h2>
-         <FormLogin onSubmit={handleSubmit(onSubmitFunction)}>
-            <EmailDiv>
-               <label htmlFor="loginEmail">Email</label>
-               <input
-                  type="email"
-                  placeholder="Your email here"
-                  id="loginEmail"
-                  {...register("email")}
-               />
-               {errors.email?.message ? (
-                  <p>{errors.email?.message}</p>
-               ) : (
-                  <p>
-                     <br />
-                  </p>
-               )}
-            </EmailDiv>
-            <PasswordDiv>
-               <label htmlFor="loginPassword">Password</label>
-               <div>
+      <>
+         <FormDiv>
+            <h2>Login</h2>
+            <FormLogin onSubmit={handleSubmit(onSubmitFunction)}>
+               <EmailDiv>
+                  <label htmlFor="loginEmail">Email</label>
                   <input
-                     type={inputType}
-                     placeholder="Your password here"
-                     id="loginPassword"
-                     {...register("password")}
+                     type="email"
+                     placeholder="Your email here"
+                     id="loginEmail"
+                     {...register("email")}
                   />
-                  {showPassword === false ? (
-                     <p onClick={displayPassword}>
-                        <BiShow />
-                     </p>
+                  {errors.email?.message ? (
+                     <p>{errors.email?.message}</p>
                   ) : (
-                     <p onClick={hidePassword}>
-                        <BiHide />
+                     <p>
+                        <br />
                      </p>
                   )}
-               </div>
-               {errors.password?.message ? (
-                  <p>{errors.password?.message}</p>
-               ) : (
-                  <p>
-                     <br />
-                  </p>
-               )}
-            </PasswordDiv>
-            <button type="submit">Login</button>
-         </FormLogin>
-      </FormDiv>
+               </EmailDiv>
+               <PasswordDiv>
+                  <label htmlFor="loginPassword">Password</label>
+                  <div>
+                     <input
+                        type={inputType}
+                        placeholder="Your password here"
+                        id="loginPassword"
+                        {...register("password")}
+                     />
+                     {showPassword === false ? (
+                        <p onClick={displayPassword}>
+                           <BiShow />
+                        </p>
+                     ) : (
+                        <p onClick={hidePassword}>
+                           <BiHide />
+                        </p>
+                     )}
+                  </div>
+                  {errors.password?.message ? (
+                     <p>{errors.password?.message}</p>
+                  ) : (
+                     <p>
+                        <br />
+                     </p>
+                  )}
+               </PasswordDiv>
+               <button type="submit">Login</button>
+            </FormLogin>
+         </FormDiv>
+      </>
    );
 };
 

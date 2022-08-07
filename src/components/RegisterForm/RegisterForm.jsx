@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import apiRequests from "../../services/apiRequests";
 
@@ -55,6 +56,16 @@ const RegisterForm = () => {
          .post("/users", formData)
          .then((res) => {
             if (res.data.id) {
+               toast.success(`${res.data.name} registered succesfully!`, {
+                  theme: "dark",
+                  position: "bottom-right",
+                  autoClose: 2500,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+               });
                console.log(res.data);
                navigate("/login", { replace: true });
             }

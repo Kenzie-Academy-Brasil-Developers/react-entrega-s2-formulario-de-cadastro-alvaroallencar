@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosConstruct } from "react-icons/io";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+
 import {
    HomePageWrapper,
    Header,
@@ -35,6 +37,16 @@ const Home = () => {
 
    const handleSignOut = () => {
       localStorage.clear();
+      toast.info("See you soon!", {
+         theme: "dark",
+         position: "bottom-right",
+         autoClose: 2500,
+         hideProgressBar: true,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+      });
       navigate("/login", { replace: true });
    };
 
