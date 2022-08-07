@@ -10,7 +10,7 @@ function App() {
       <>
          <GlobalStyle />
          <Routes />
-         <ToastContainer transition={Flip} />
+         <ToastContainer transition={Flip} limit={2} pauseOnFocusLoss={false} />
       </>
    );
 }

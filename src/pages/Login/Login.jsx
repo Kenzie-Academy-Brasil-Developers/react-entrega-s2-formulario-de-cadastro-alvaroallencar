@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import { toast } from "react-toastify";
 
 import { LoginPageWrapper, LoginSection } from "./login.styles";
 
@@ -10,11 +11,33 @@ import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
 
 const Login = () => {
    const navigate = useNavigate();
+   // eslint-disable-next-line no-unused-vars
+   const [user, setUser] = useState([]);
 
    useEffect(() => {
-      const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
-      if (token) {
+      const tokenInLocalStorage = JSON.parse(
+         localStorage.getItem("@KenzieHub:token")
+      );
+
+      const userInLocalStorage = JSON.parse(
+         localStorage.getItem("@KenzieHub:user")
+      );
+
+      if (tokenInLocalStorage && userInLocalStorage) {
+         setUser(userInLocalStorage);
+         toast.info("You are already logged in!", {
+            theme: "dark",
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+         });
          navigate("/home", { replace: true });
+      } else {
+         navigate("/login", { replace: true });
       }
    }, []);
 

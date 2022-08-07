@@ -53,7 +53,7 @@ const LoginForm = () => {
                toast.success(`Welcome ${res.data.user.name}!`, {
                   theme: "dark",
                   position: "bottom-right",
-                  autoClose: 2500,
+                  autoClose: 3000,
                   hideProgressBar: true,
                   closeOnClick: true,
                   pauseOnHover: true,
@@ -72,7 +72,19 @@ const LoginForm = () => {
                navigate("/home", { replace: true });
             }
          })
-         .catch((err) => console.log(err));
+         .catch((err) => {
+            console.log(err.response.data.message);
+            toast.warn(`${err.response.data.message}!`, {
+               theme: "dark",
+               position: "bottom-right",
+               autoClose: 3000,
+               hideProgressBar: true,
+               closeOnClick: true,
+               pauseOnHover: true,
+               draggable: true,
+               progress: undefined,
+            });
+         });
    };
 
    return (

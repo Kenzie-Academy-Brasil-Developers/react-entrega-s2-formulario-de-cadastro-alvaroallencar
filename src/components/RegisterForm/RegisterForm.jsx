@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-useless-escape */
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -56,10 +57,10 @@ const RegisterForm = () => {
          .post("/users", formData)
          .then((res) => {
             if (res.data.id) {
-               toast.success(`${res.data.name} registered succesfully!`, {
+               toast.success(`User ${res.data.name} created succesfully! Please login!`, {
                   theme: "dark",
                   position: "bottom-right",
-                  autoClose: 2500,
+                  autoClose: 3000,
                   hideProgressBar: true,
                   closeOnClick: true,
                   pauseOnHover: true,

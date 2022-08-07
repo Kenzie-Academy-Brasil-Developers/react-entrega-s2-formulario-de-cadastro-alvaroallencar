@@ -30,9 +30,21 @@ const Home = () => {
          localStorage.getItem("@KenzieHub:user")
       );
 
-      tokenInLocalStorage && userInLocalStorage
-         ? setUser(userInLocalStorage)
-         : navigate("/login", { replace: true });
+      if (tokenInLocalStorage && userInLocalStorage) {
+         setUser(userInLocalStorage);
+      } else {
+         toast.warn(`You need to log in to access this page!`, {
+            theme: "dark",
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+         });
+         navigate("/login", { replace: true });
+      }
    }, []);
 
    const handleSignOut = () => {
@@ -40,7 +52,7 @@ const Home = () => {
       toast.info("See you soon!", {
          theme: "dark",
          position: "bottom-right",
-         autoClose: 2500,
+         autoClose: 3000,
          hideProgressBar: true,
          closeOnClick: true,
          pauseOnHover: true,

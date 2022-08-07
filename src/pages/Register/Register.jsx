@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import { toast } from "react-toastify";
 import {
    RegisterPageWrapper,
    RegisterHeader,
@@ -12,11 +13,31 @@ import {
 import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
 
 const Register = () => {
+   // eslint-disable-next-line no-unused-vars
+   const [user, setUser] = useState([]);
    const navigate = useNavigate();
 
    useEffect(() => {
-      const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
-      if (token) {
+      const tokenInLocalStorage = JSON.parse(
+         localStorage.getItem("@KenzieHub:token")
+      );
+
+      const userInLocalStorage = JSON.parse(
+         localStorage.getItem("@KenzieHub:user")
+      );
+
+      if (tokenInLocalStorage && userInLocalStorage) {
+         setUser(userInLocalStorage);
+         toast.info("You must logout to create a new user!", {
+            theme: "dark",
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+         });
          navigate("/home", { replace: true });
       }
    }, []);
