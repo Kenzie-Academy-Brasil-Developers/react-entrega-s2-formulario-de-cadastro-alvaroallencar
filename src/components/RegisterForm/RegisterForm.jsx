@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -27,7 +28,6 @@ const RegisterForm = () => {
          .trim()
          .required("Password required")
          .matches(
-            // eslint-disable-next-line no-useless-escape
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\.*])(?=.{8,})/,
             "Must contain at least 8 characters, 1 lowercase, 1 uppercase, 1 number and 1 special character"
          ),

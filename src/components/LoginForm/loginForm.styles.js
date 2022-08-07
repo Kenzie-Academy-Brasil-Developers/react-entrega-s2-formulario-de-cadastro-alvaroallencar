@@ -91,7 +91,7 @@ export const PasswordDiv = styled.div`
          background-color: rgba(var(--color-grey-2), 1);
       }
 
-      button {
+      p {
          width: 15%;
          height: 48px;
          align-self: center;

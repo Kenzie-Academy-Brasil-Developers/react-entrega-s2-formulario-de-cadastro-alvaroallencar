@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,7 @@ import { LoginPageWrapper, LoginSection } from "./login.styles";
 
 import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
 
-const Login = ({ isLoggedIn, setIsLoggedIn }) => {
+const Login = () => {
    const navigate = useNavigate();
 
    useEffect(() => {
@@ -15,7 +16,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
       if (token) {
          navigate("/home", { replace: true });
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    const handleGoToRegister = () => {
@@ -30,11 +30,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
          exit={{ x: 100, opacity: 0 }}
          transition={{ duration: 0.6 }}
       >
-         <div>
+         <figure>
             <img src={KenzieHubLogo} alt="Kenzie Hub Logo" />
-         </div>
+         </figure>
          <LoginSection>
-            <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <LoginForm />
             <div>
                <p>Don't have an account yet?</p>
                <button onClick={handleGoToRegister}>Register</button>

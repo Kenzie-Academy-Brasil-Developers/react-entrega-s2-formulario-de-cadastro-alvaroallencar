@@ -1,8 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
-
 import {
    RegisterPageWrapper,
    RegisterHeader,
@@ -19,7 +19,6 @@ const Register = () => {
       if (token) {
          navigate("/home", { replace: true });
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    const handleBackToLogin = () => {
@@ -31,7 +30,6 @@ const Register = () => {
          as={motion.div}
          initial={{ x: 100, opacity: 0 }}
          animate={{ x: 0, opacity: 1 }}
-         exit={{ x: -100, opacity: 0 }}
          transition={{ duration: 0.6 }}
       >
          <RegisterHeader>

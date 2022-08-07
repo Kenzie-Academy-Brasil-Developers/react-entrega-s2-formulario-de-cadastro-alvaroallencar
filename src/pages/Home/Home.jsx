@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosConstruct } from "react-icons/io";
@@ -22,16 +23,14 @@ const Home = () => {
       const tokenInLocalStorage = JSON.parse(
          localStorage.getItem("@KenzieHub:token")
       );
+
       const userInLocalStorage = JSON.parse(
          localStorage.getItem("@KenzieHub:user")
       );
 
-      if (tokenInLocalStorage && userInLocalStorage) {
-         setUser(userInLocalStorage);
-      } else {
-         navigate("/login", { replace: true });
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      tokenInLocalStorage && userInLocalStorage
+         ? setUser(userInLocalStorage)
+         : navigate("/login", { replace: true });
    }, []);
 
    const handleSignOut = () => {

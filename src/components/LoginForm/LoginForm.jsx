@@ -94,13 +94,13 @@ const LoginForm = () => {
                      {...register("password")}
                   />
                   {showPassword === false ? (
-                     <button onClick={displayPassword}>
+                     <p onClick={displayPassword}>
                         <BiShow />
-                     </button>
+                     </p>
                   ) : (
-                     <button onClick={hidePassword}>
+                     <p onClick={hidePassword}>
                         <BiHide />
-                     </button>
+                     </p>
                   )}
                </div>
                {errors.password?.message ? (
