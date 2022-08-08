@@ -75,6 +75,6 @@ export const InputContainer = styled.div`
 
    p {
       font-size: 11px;
-      color: rgba(var(--color-primary-focus), 1);
+      color: rgba(var(--color-negative-pink), 1);
    }
 `;

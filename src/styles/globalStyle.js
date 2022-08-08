@@ -6,9 +6,9 @@ const GlobalStyle = createGlobalStyle`
 
     /* Primary palette: */
 
-    --color-primary: 255, 87, 127;
-    --color-primary-focus: 255, 66, 127;
-    --color-primary-negative: 89, 50, 63;
+    --color-primary: 30, 144, 255;
+    --color-primary-focus: 65, 105, 225;
+    --color-primary-negative: 100, 149, 237;
 
     /* Grey scale palette: */
 

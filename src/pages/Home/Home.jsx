@@ -49,7 +49,7 @@ const Home = () => {
 
    const handleSignOut = () => {
       localStorage.clear();
-      toast.info(`See you soon, ${user.name} !`, {
+      toast.info(`See you soon, ${user.name}!`, {
          theme: "dark",
          position: "bottom-right",
          autoClose: 3000,
