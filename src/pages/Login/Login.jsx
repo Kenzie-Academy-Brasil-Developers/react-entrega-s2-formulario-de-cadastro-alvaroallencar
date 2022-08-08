@@ -1,46 +1,70 @@
-import LoginForm from "../../components/LoginForm/LoginForm";
-import { Link, useNavigate } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import { toast } from "react-toastify";
+
+import { LoginPageWrapper, LoginSection } from "./login.styles";
 
 import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
-import styled from "./Login.module.css";
-import { useEffect } from "react";
 
-const Login = ({ isLoggedIn, setIsLoggedIn }) => {
-  const navigate = useNavigate();
+const Login = () => {
+   const navigate = useNavigate();
+   // eslint-disable-next-line no-unused-vars
+   const [user, setUser] = useState([]);
 
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+   useEffect(() => {
+      const tokenInLocalStorage = JSON.parse(
+         localStorage.getItem("@KenzieHub:token")
+      );
 
-  return (
-    <motion.div
-      className={styled.loginPage}
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 100, opacity: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className={styled.logoBox}>
-        <img src={KenzieHubLogo} alt="Kenzie Hub Logo" />
-      </div>
-      <section className={styled.loginSection}>
-        <div className={styled.loginFormBox}>
-          <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        </div>
-        <div className={styled.registerButtonBox}>
-          <p>Don't have an account yet?</p>
-          <Link to="/register" className={styled.goToRegisterLink}>
-            <button>Register</button>
-          </Link>
-        </div>
-      </section>
-    </motion.div>
-  );
+      const userInLocalStorage = JSON.parse(
+         localStorage.getItem("@KenzieHub:user")
+      );
+
+      if (tokenInLocalStorage && userInLocalStorage) {
+         setUser(userInLocalStorage);
+         toast.info("You are already logged in!", {
+            theme: "dark",
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+         });
+         navigate("/home", { replace: true });
+      } else {
+         navigate("/login", { replace: true });
+      }
+   }, []);
+
+   const handleGoToRegister = () => {
+      navigate("/register", { replace: true });
+   };
+
+   return (
+      <LoginPageWrapper
+         as={motion.div}
+         initial={{ x: -100, opacity: 0 }}
+         animate={{ x: 0, opacity: 1 }}
+         exit={{ x: 100, opacity: 0 }}
+         transition={{ duration: 0.6 }}
+      >
+         <figure>
+            <img src={KenzieHubLogo} alt="Kenzie Hub Logo" />
+         </figure>
+         <LoginSection>
+            <LoginForm />
+            <div>
+               <p>Don't have an account yet?</p>
+               <button onClick={handleGoToRegister}>Register</button>
+            </div>
+         </LoginSection>
+      </LoginPageWrapper>
+   );
 };
 
 export default Login;

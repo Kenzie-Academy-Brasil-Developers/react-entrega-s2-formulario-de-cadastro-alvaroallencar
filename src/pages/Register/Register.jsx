@@ -1,49 +1,69 @@
-import RegisterForm from "../../components/RegisterForm/RegisterForm";
-import { useNavigate } from "react-router-dom";
-import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import { toast } from "react-toastify";
+import {
+   RegisterPageWrapper,
+   RegisterHeader,
+   RegisterSection,
+} from "./register.styles";
 
-import styled from "./Register.module.css";
+import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
 
 const Register = () => {
-  const navigate = useNavigate();
+   // eslint-disable-next-line no-unused-vars
+   const [user, setUser] = useState([]);
+   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+   useEffect(() => {
+      const tokenInLocalStorage = JSON.parse(
+         localStorage.getItem("@KenzieHub:token")
+      );
 
-  const handleBackToLogin = () => {
-    navigate("/login", { replace: true });
-  };
+      const userInLocalStorage = JSON.parse(
+         localStorage.getItem("@KenzieHub:user")
+      );
 
-  return (
-    <motion.div
-      className={styled.registerPage}
-      initial={{ x: 100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: -100, opacity: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className={styled.registerHeader}>
-        <div className={styled.logoBox}>
-          <img src={KenzieHubLogo} alt="Kenzie Hub Logo" />
-        </div>
-        <button className={styled.goToLoginButton} onClick={handleBackToLogin}>
-          Back
-        </button>
-      </div>
-      <section className={styled.registerSection}>
-        <div className={styled.registerFormBox}>
-          <RegisterForm />
-        </div>
-      </section>
-    </motion.div>
-  );
+      if (tokenInLocalStorage && userInLocalStorage) {
+         setUser(userInLocalStorage);
+         toast.info("You must log out to create a new user!", {
+            theme: "dark",
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+         });
+         navigate("/home", { replace: true });
+      }
+   }, []);
+
+   const handleBackToLogin = () => {
+      navigate("/login", { replace: true });
+   };
+
+   return (
+      <RegisterPageWrapper
+         as={motion.div}
+         initial={{ x: 100, opacity: 0 }}
+         animate={{ x: 0, opacity: 1 }}
+         transition={{ duration: 0.6 }}
+      >
+         <RegisterHeader>
+            <figure>
+               <img src={KenzieHubLogo} alt="Kenzie Hub Logo" />
+            </figure>
+            <button onClick={handleBackToLogin}>Back</button>
+         </RegisterHeader>
+         <RegisterSection>
+            <RegisterForm />
+         </RegisterSection>
+      </RegisterPageWrapper>
+   );
 };
 
 export default Register;

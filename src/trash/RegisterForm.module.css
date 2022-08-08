@@ -1,4 +1,4 @@
-.titleBox {
+/* .titleBox {
   width: 100%;
   height: 8%;
   display: flex;
@@ -20,9 +20,9 @@
   font-size: 12.182px;
   line-height: 22px;
   color: rgba(var(--color-grey-1));
-}
+} */
 
-.registerForm {
+/* .registerForm {
   width: 100%;
   height: 92%;
   display: flex;
@@ -37,9 +37,9 @@
   cursor: pointer;
   color: rgba(var(--color-grey-0));
   background-color: rgba(var(--color-primary), 1);
-}
+} */
 
-.nameDiv {
+/* .nameDiv {
   width: 100%;
   height: 12.5%;
   display: flex;
@@ -93,9 +93,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 
-.nameDiv > label,
+/* .nameDiv > label,
 .emailDiv > label,
 .passwordDiv > label,
 .confirmPasswordDiv > label,
@@ -105,9 +105,9 @@
   font-weight: 400;
   font-size: 12.182px;
   color: rgba(var(--color-grey-0));
-}
+} */
 
-.nameDiv > input,
+/* .nameDiv > input,
 .emailDiv > input,
 .passwordDiv > input,
 .confirmPasswordDiv > input,
@@ -122,9 +122,9 @@
   color: rgba(var(--color-grey-0));
   border: 1.2182px solid rgba(var(--color-grey-0));
   background-color: rgba(var(--color-grey-2), 1);
-}
-
+} */
+/* 
 .errorMessage {
   font-size: 11px;
   color: rgba(var(--color-primary-focus), 1);
-}
+} */
