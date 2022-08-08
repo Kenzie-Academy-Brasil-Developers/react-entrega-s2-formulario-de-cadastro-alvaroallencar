@@ -95,7 +95,7 @@ const LoginForm = () => {
                <EmailDiv>
                   <label htmlFor="loginEmail">Email</label>
                   <input
-                     type="email"
+                     type="text"
                      placeholder="Your email here"
                      id="loginEmail"
                      {...register("email")}

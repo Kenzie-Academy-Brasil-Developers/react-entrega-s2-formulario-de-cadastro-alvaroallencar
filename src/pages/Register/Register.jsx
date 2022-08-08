@@ -28,7 +28,7 @@ const Register = () => {
 
       if (tokenInLocalStorage && userInLocalStorage) {
          setUser(userInLocalStorage);
-         toast.info("You must logout to create a new user!", {
+         toast.info("You must log out to create a new user!", {
             theme: "dark",
             position: "bottom-right",
             autoClose: 3000,
