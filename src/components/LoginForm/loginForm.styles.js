@@ -31,6 +31,12 @@ export const FormLogin = styled.form`
       cursor: pointer;
       color: rgba(var(--color-grey-0));
       background-color: rgba(var(--color-primary), 1);
+      transition: 0.3s;
+
+      &:hover {
+         transform: scale(1.02);
+         background-color: rgba(var(--color-primary), 0.7);
+      }
    }
 `;
 
@@ -56,6 +62,17 @@ export const EmailDiv = styled.div`
       color: rgba(var(--color-grey-0));
       border: 1.2182px solid rgba(var(--color-grey-0));
       background-color: rgba(var(--color-grey-2), 1);
+      transition: 0.3s;
+      cursor: text;
+
+      &:hover {
+         background-color: rgba(var(--color-grey-2), 0.5);
+      }
+
+      &:focus {
+         transform: scale(1.02);
+         background-color: rgba(var(--color-grey-2), 0.5);
+      }
    }
 
    p {
@@ -89,6 +106,17 @@ export const PasswordDiv = styled.div`
          color: rgba(var(--color-grey-0));
          border: 1.2182px solid rgba(var(--color-grey-0));
          background-color: rgba(var(--color-grey-2), 1);
+         transition: 0.3s;
+         cursor: text;
+
+         &:hover {
+            background-color: rgba(var(--color-grey-2), 0.5);
+         }
+
+         &:focus {
+            transform: scale(1.02);
+            background-color: rgba(var(--color-grey-2), 0.5);
+         }
       }
 
       p {
@@ -104,6 +132,11 @@ export const PasswordDiv = styled.div`
          justify-content: center;
          align-items: center;
          cursor: pointer;
+         transition: 0.3s;
+
+         &:hover {
+            background-color: rgba(var(--color-grey-2), 0.5);
+         }
       }
    }
 

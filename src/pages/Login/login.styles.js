@@ -72,6 +72,12 @@ export const LoginSection = styled.section`
          background-color: rgba(var(--color-grey-1));
          border-radius: 4px;
          cursor: pointer;
+         transition: 0.3s;
+
+         &:hover {
+            transform: scale(1.02);
+            background-color: rgba(var(--color-primary), 0.7);
+         }
       }
    }
 `;

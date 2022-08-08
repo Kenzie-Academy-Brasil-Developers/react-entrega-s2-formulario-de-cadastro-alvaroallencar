@@ -77,8 +77,14 @@ export const HeaderContainer = styled.div`
          font-size: 12px;
          line-height: 28px;
          color: rgba(var(--color-grey-0));
-         background-color: rgba(var(--color-grey-3));
+         background-color: rgba(var(--color-grey-3), 1);
          cursor: pointer;
+         transition: 0.3s;
+
+         &:hover {
+            transform: scale(1.02);
+            background-color: rgba(var(--color-primary), 1);
+         }
       }
    }
 `;

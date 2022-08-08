@@ -45,6 +45,12 @@ export const FormRegister = styled.form`
       cursor: pointer;
       color: rgba(var(--color-grey-0));
       background-color: rgba(var(--color-primary), 1);
+      transition: 0.3s;
+
+      &:hover {
+         transform: scale(1.02);
+         background-color: rgba(var(--color-primary), 0.7);
+      }
    }
 `;
 
@@ -61,7 +67,28 @@ export const InputContainer = styled.div`
       color: rgba(var(--color-grey-0));
    }
 
-   input,
+   input {
+      width: 100%;
+      padding: 0px 16.2426px;
+      height: 48px;
+      outline: none;
+      border-radius: 4px;
+      color: rgba(var(--color-grey-0));
+      border: 1.2182px solid rgba(var(--color-grey-0));
+      background-color: rgba(var(--color-grey-2), 1);
+      transition: 0.3s;
+      cursor: text;
+
+      &:hover {
+         background-color: rgba(var(--color-grey-1), 0.1);
+      }
+
+      &:focus {
+         transform: scale(1.02);
+         background-color: rgba(var(--color-grey-1), 0.1);
+      }
+   }
+
    select {
       width: 100%;
       padding: 0px 16.2426px;
@@ -71,6 +98,17 @@ export const InputContainer = styled.div`
       color: rgba(var(--color-grey-0));
       border: 1.2182px solid rgba(var(--color-grey-0));
       background-color: rgba(var(--color-grey-2), 1);
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+         background-color: rgba(var(--color-grey-1), 0.1);
+      }
+
+      &:focus {
+         transform: scale(1.02);
+         background-color: rgba(var(--color-grey-2), 1);
+      }
    }
 
    p {

@@ -45,6 +45,12 @@ export const RegisterHeader = styled.div`
       color: rgba(var(--color-grey-0));
       background-color: rgba(var(--color-grey-3));
       cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+         transform: scale(1.02);
+         background-color: rgba(var(--color-primary), 1);
+      }
    }
 `;
 
