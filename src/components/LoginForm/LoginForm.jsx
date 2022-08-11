@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
 
-import apiRequests from "../../services/apiRequests";
+import { UserContext } from "../../contexts/UserContext";
+import { useContext } from "react";
 
 import { FormDiv, FormLogin, EmailDiv, PasswordDiv } from "./loginForm.styles";
 
 const LoginForm = () => {
    const [showPassword, setShowPassword] = useState(false);
    const [inputType, setInputType] = useState("password");
-   const navigate = useNavigate();
+   const { onSubmitLoginFunction } = useContext(UserContext);
 
    const formSchema = yup.object().shape({
       email: yup
@@ -44,54 +43,11 @@ const LoginForm = () => {
       setInputType("password");
    };
 
-   const onSubmitFunction = (formData) => {
-      console.log(formData);
-      apiRequests
-         .post("/sessions", formData)
-         .then((res) => {
-            if (res.data.token) {
-               toast.success(`Welcome ${res.data.user.name}!`, {
-                  theme: "dark",
-                  position: "bottom-right",
-                  autoClose: 3000,
-                  hideProgressBar: true,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-               });
-               console.log(res.data);
-               localStorage.setItem(
-                  "@KenzieHub:user",
-                  JSON.stringify(res.data.user)
-               );
-               localStorage.setItem(
-                  "@KenzieHub:token",
-                  JSON.stringify(res.data.token)
-               );
-               navigate("/home", { replace: true });
-            }
-         })
-         .catch((err) => {
-            console.log(err.response.data.message);
-            toast.warn(`${err.response.data.message}!`, {
-               theme: "dark",
-               position: "bottom-right",
-               autoClose: 3000,
-               hideProgressBar: true,
-               closeOnClick: true,
-               pauseOnHover: true,
-               draggable: true,
-               progress: undefined,
-            });
-         });
-   };
-
    return (
       <>
          <FormDiv>
             <h2>Login</h2>
-            <FormLogin onSubmit={handleSubmit(onSubmitFunction)}>
+            <FormLogin onSubmit={handleSubmit(onSubmitLoginFunction)}>
                <EmailDiv>
                   <label htmlFor="loginEmail">Email</label>
                   <input
