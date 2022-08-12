@@ -54,7 +54,6 @@ const UserProvider = ({ children }) => {
             progress: undefined,
           });
 
-          localStorage.setItem("@KenzieHub:user", JSON.stringify(userResponse));
           localStorage.setItem("@KenzieHub:token", JSON.stringify(token));
 
           const toNavigate = location.state?.from?.pathname || "/home";
