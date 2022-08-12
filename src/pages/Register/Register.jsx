@@ -1,69 +1,86 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import apiRequests from "../../services/apiRequests";
+import { UserContext } from "../../contexts/UserContext";
+import { VscLoading } from "react-icons/vsc";
 import {
-   RegisterPageWrapper,
-   RegisterHeader,
-   RegisterSection,
+  RegisterPageWrapper,
+  RegisterHeader,
+  RegisterSection,
+  LoadingMessage,
 } from "./register.styles";
 
 import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
 
 const Register = () => {
-   // eslint-disable-next-line no-unused-vars
-   const [user, setUser] = useState([]);
-   const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { setUser, loading } = useContext(UserContext);
 
-   useEffect(() => {
-      const tokenInLocalStorage = JSON.parse(
-         localStorage.getItem("@KenzieHub:token")
-      );
+  useEffect(() => {
+    async function getUser() {
+      const token = JSON.parse(localStorage.getItem("@KenzieHub:token"));
 
-      const userInLocalStorage = JSON.parse(
-         localStorage.getItem("@KenzieHub:user")
-      );
+      if (token) {
+        apiRequests.defaults.headers.authorization = `Bearer ${token}`;
 
-      if (tokenInLocalStorage && userInLocalStorage) {
-         setUser(userInLocalStorage);
-         toast.info("You must log out to create a new user!", {
-            theme: "dark",
-            position: "bottom-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-         });
-         navigate("/home", { replace: true });
+        await apiRequests
+          .get("/profile")
+          .then((res) => {
+            setUser(res.data);
+
+            toast.info("You must log out to create a new user.", {
+              theme: "dark",
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+
+            const toNavigate = location.state?.from?.pathname || "/home";
+
+            navigate(toNavigate, { replace: true });
+          })
+          .catch((err) => console.log(err));
       }
-   }, []);
+    }
 
-   const handleBackToLogin = () => {
-      navigate("/login", { replace: true });
-   };
+    getUser();
+  }, []);
 
-   return (
-      <RegisterPageWrapper
-         as={motion.div}
-         initial={{ x: 100, opacity: 0 }}
-         animate={{ x: 0, opacity: 1 }}
-         transition={{ duration: 0.6 }}
-      >
-         <RegisterHeader>
-            <figure>
-               <img src={KenzieHubLogo} alt="Kenzie Hub Logo" />
-            </figure>
-            <button onClick={handleBackToLogin}>Back</button>
-         </RegisterHeader>
-         <RegisterSection>
-            <RegisterForm />
-         </RegisterSection>
-      </RegisterPageWrapper>
-   );
+  const handleBackToLogin = () => {
+    navigate("/login", { replace: true });
+  };
+
+  return loading === false ? (
+    <RegisterPageWrapper
+      as={motion.div}
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <RegisterHeader>
+        <figure>
+          <img src={KenzieHubLogo} alt="Kenzie Hub Logo" />
+        </figure>
+        <button onClick={handleBackToLogin}>Back</button>
+      </RegisterHeader>
+      <RegisterSection>
+        <RegisterForm />
+      </RegisterSection>
+    </RegisterPageWrapper>
+  ) : (
+    <LoadingMessage>
+      <VscLoading />
+    </LoadingMessage>
+  );
 };
 
 export default Register;
