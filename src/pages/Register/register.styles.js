@@ -94,7 +94,7 @@ export const LoadingMessage = styled.div`
 
   @media (prefers-reduced-motion: no-preference) {
     & {
-      animation: LoadingMessageSpin infinite 1.5s linear;
+      animation: LoadingMessageSpin infinite 1s linear;
     }
   }
 

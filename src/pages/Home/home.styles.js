@@ -9,6 +9,7 @@ export const HomePageWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  
   @media screen and (max-width: 820px) {
     & {
       width: 90%;
@@ -167,5 +168,38 @@ export const UserTechInfoMain = styled.main`
     font-size: 50px;
     line-height: 28px;
     color: rgba(var(--color-grey-0));
+  }
+`;
+
+export const TechsHeader = styled.div`
+  width: 100%;
+  max-width: 800px;
+  padding: 20px 0;
+  transition: 0.5s;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > p {
+    color: rgba(var(--color-white), 1);
+  }
+
+  & > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    color: rgba(var(--color-white), 1);
+    background-color: rgba(var(--color-grey-3), 1);
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.02);
+      background-color: rgba(var(--color-primary), 1);
+    }
   }
 `;

@@ -14,6 +14,7 @@ export const TitleDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
   & > h2 {
     font-weight: 700;
     height: 15%;
@@ -21,6 +22,7 @@ export const TitleDiv = styled.div`
     line-height: 28px;
     color: rgba(var(--color-grey-0));
   }
+
   & > p {
     font-weight: 400;
     font-size: 12.182px;
@@ -35,6 +37,7 @@ export const FormRegister = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   & > button {
     width: 100%;
     height: 48px;
@@ -43,6 +46,7 @@ export const FormRegister = styled.form`
     color: rgba(var(--color-grey-0));
     background-color: rgba(var(--color-primary), 1);
     transition: 0.3s;
+
     &:hover {
       transform: scale(1.02);
       background-color: rgba(var(--color-primary), 0.7);
@@ -56,11 +60,13 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   label {
     font-weight: 400;
     font-size: 12.182px;
     color: rgba(var(--color-grey-0));
   }
+
   input {
     width: 100%;
     padding: 0px 16.2426px;
@@ -72,14 +78,17 @@ export const InputContainer = styled.div`
     background-color: rgba(var(--color-grey-2), 1);
     transition: 0.3s;
     cursor: text;
+
     &:hover {
       background-color: rgba(var(--color-grey-1), 0.1);
     }
+
     &:focus {
       transform: scale(1.02);
       background-color: rgba(var(--color-grey-1), 0.1);
     }
   }
+
   select {
     width: 100%;
     padding: 0px 16.2426px;
@@ -91,14 +100,17 @@ export const InputContainer = styled.div`
     background-color: rgba(var(--color-grey-2), 1);
     transition: 0.3s;
     cursor: pointer;
+
     &:hover {
       background-color: rgba(var(--color-grey-1), 0.1);
     }
+
     &:focus {
       transform: scale(1.02);
       background-color: rgba(var(--color-grey-2), 1);
     }
   }
+
   p {
     font-size: 11px;
     color: rgba(var(--color-negative-pink), 1);
