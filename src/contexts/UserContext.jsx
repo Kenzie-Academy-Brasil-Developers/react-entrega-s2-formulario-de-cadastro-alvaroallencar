@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -23,6 +24,7 @@ const UserProvider = ({ children }) => {
           .then((res) => {
             const { data } = res;
             setUser(data);
+            console.log(data);
           })
           .catch((err) => console.log(err));
       }
@@ -114,9 +116,31 @@ const UserProvider = ({ children }) => {
       });
   };
 
+  const handleSignOut = () => {
+    localStorage.clear();
+    toast.info(`See you soon, ${user.name}!`, {
+      theme: "dark",
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    navigate("/login", { replace: true });
+  };
+
   return (
     <UserContext.Provider
-      value={{ user, setUser, loading, onSubmitLogin, onSubmitRegister }}
+      value={{
+        user,
+        setUser,
+        loading,
+        onSubmitLogin,
+        onSubmitRegister,
+        handleSignOut,
+      }}
     >
       {children}
     </UserContext.Provider>

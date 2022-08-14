@@ -1,10 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { IoIosConstruct } from "react-icons/io";
+import { IoMdAddCircle } from "react-icons/io";
 import { motion } from "framer-motion";
-import { toast } from "react-toastify";
 import { UserContext } from "../../contexts/UserContext";
+import { TechContext } from "../../contexts/TechContext";
+import TechsList from "../../components/TechsList/TechsList";
+import AddTechModal from "../../components/AddTechModal/AddTechModal";
 
 import {
   HomePageWrapper,
@@ -13,29 +13,14 @@ import {
   SectionContainer,
   WelcomeMessageDiv,
   UserModuleDiv,
-  UserTechInfoMain,
+  TechsHeader,
 } from "./home.styles";
 
 import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const { user } = useContext(UserContext);
-
-  const handleSignOut = () => {
-    localStorage.clear();
-    toast.info(`See you soon, ${user.name}!`, {
-      theme: "dark",
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    navigate("/login", { replace: true });
-  };
+  const { user, handleSignOut } = useContext(UserContext);
+  const { add, showAddTechModal } = useContext(TechContext);
 
   return (
     <HomePageWrapper
@@ -55,6 +40,7 @@ const Home = () => {
           </div>
         </HeaderContainer>
       </Header>
+
       <SectionContainer>
         <section>
           <WelcomeMessageDiv>
@@ -65,20 +51,21 @@ const Home = () => {
           </UserModuleDiv>
         </section>
       </SectionContainer>
-      <UserTechInfoMain>
-        <p>Sorry, but this page is not complete yet :(</p>
-        <motion.p
-          initial={{ scale: 0.8, opacity: 0.5 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{
-            repeat: Infinity,
-            duration: 0.5,
-            repeatType: "reverse",
-          }}
-        >
-          <IoIosConstruct />
-        </motion.p>
-      </UserTechInfoMain>
+
+      <TechsHeader>
+        <p>Technologies</p>
+        <button onClick={showAddTechModal}>
+          <IoMdAddCircle />
+        </button>
+      </TechsHeader>
+
+      {user.techs.length > 0 ? (
+        <TechsList />
+      ) : (
+        <p style={{ color: "white" }}>Nothing here</p>
+      )}
+
+      {add && <AddTechModal />}
     </HomePageWrapper>
   );
 };

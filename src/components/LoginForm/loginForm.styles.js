@@ -86,8 +86,9 @@ export const PasswordDiv = styled.div`
   }
   & > div {
     display: flex;
+    justify-content: space-between;
     input {
-      width: 85%;
+      width: 84%;
       padding: 0px 16.2426px;
       height: 48px;
       outline: none;
