@@ -9,11 +9,8 @@ const TechsList = () => {
   const { user } = useContext(UserContext);
   const {
     details,
-    techId,
     setTechId,
-    techTitleInput,
     setTechTitleInput,
-    techStatusSelect,
     setTechStatusSelect,
     showDetailsTechModal,
   } = useContext(TechContext);

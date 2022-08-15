@@ -18,10 +18,7 @@ import {
 
 const DetailsTechModal = () => {
   const {
-    techId,
-    setTechId,
     techTitleInput,
-    setTechTitleInput,
     techStatusSelect,
     setTechStatusSelect,
     showDetailsTechModal,

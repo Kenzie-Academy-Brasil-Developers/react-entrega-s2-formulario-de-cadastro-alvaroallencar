@@ -103,7 +103,19 @@ const TechProvider = ({ children }) => {
             .catch((err) => console.log(err));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.warn(`${err.response.data.message}`, {
+          theme: "dark",
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const deleteTech = () => {
@@ -133,7 +145,19 @@ const TechProvider = ({ children }) => {
             .catch((err) => console.log(err));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.warn(`${err.response.data.message}`, {
+          theme: "dark",
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   return (
