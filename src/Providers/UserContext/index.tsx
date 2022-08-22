@@ -7,6 +7,8 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+
 import kenzieHubApi from "../../services/kenzieHubApi";
 
 // Creating interfaces -----------------------------------------------------------
@@ -104,7 +106,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
             setUser(data);
           })
-          .catch((err) => console.log(err));
+          .catch((err: AxiosError) => console.log(err));
       }
       setLoading(false);
     }
@@ -136,10 +138,11 @@ export const UserProvider = ({ children }: UserProviderProps) => {
           navigate("/home", { replace: true });
         }
       })
-      .catch((err) => {
-        console.log(err.response.data.message);
+      .catch((err: AxiosError) => {
+        const { message } = err;
+        console.log(message);
 
-        toast.warn(`${err.response.data.message}!`);
+        toast.warn(`${message}!`);
       });
   };
 
@@ -156,8 +159,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
           navigate("/login", { replace: true });
         }
       })
-      .catch((err) => {
-        const { message } = err.response.data;
+      .catch((err : AxiosError) => {
+        const { message } = err;
 
         console.log(message);
 

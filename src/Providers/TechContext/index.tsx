@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 import kenzieHubApi from "../../services/kenzieHubApi";
 import { useUserContext } from "../UserContext";
@@ -82,13 +83,16 @@ export const TechProvider = ({ children }: TechProviderProps) => {
 
               showAddTechModal();
             })
-            .catch((err) => console.log(err));
+            .catch((err: AxiosError) => console.log(err));
         }
       })
-      .catch((err) => {
+      .catch((err: AxiosError) => {
         console.log(err);
+
+        const { message } = err;
+
         if (
-          err.response.data.message ===
+          message ===
           "User Already have this technology created you can only update it"
         ) {
           toast.warn(
@@ -113,10 +117,10 @@ export const TechProvider = ({ children }: TechProviderProps) => {
 
               showDetailsTechModal();
             })
-            .catch((err) => console.log(err));
+            .catch((err: AxiosError) => console.log(err));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err: AxiosError) => console.log(err));
   };
 
   const deleteTech = (): void => {
@@ -134,10 +138,10 @@ export const TechProvider = ({ children }: TechProviderProps) => {
 
               showDetailsTechModal();
             })
-            .catch((err) => console.log(err));
+            .catch((err: AxiosError) => console.log(err));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err: AxiosError) => console.log(err));
   };
 
   return (

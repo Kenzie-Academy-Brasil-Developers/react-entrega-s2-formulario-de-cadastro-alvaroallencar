@@ -9,7 +9,7 @@ export const HomePageWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  
+
   @media screen and (max-width: 820px) {
     & {
       width: 90%;
@@ -202,4 +202,9 @@ export const TechsHeader = styled.div`
       background-color: rgba(var(--color-primary), 1);
     }
   }
+`;
+
+export const NothingHere = styled.p`
+  color: rgba(var(--color-white), 1);
+  font-size: 2rem;
 `;

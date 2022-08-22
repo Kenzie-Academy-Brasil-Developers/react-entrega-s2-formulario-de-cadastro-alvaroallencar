@@ -9,15 +9,11 @@ const ProtectedRoutes = () => {
   const { user, loading } = useUserContext();
   const location = useLocation();
 
-  if (loading) {
-    return (
-      <LoadingMessage>
-        <VscLoading />
-      </LoadingMessage>
-    );
-  }
-
-  return user ? (
+  return loading === true ? (
+    <LoadingMessage>
+      <VscLoading />
+    </LoadingMessage>
+  ) : user && Object.keys(user).length > 0 ? (
     <Outlet />
   ) : (
     <Navigate to="/login" replace state={{ from: location }} />

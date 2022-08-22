@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { VscLoading } from "react-icons/vsc";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { AxiosError } from "axios";
 
 import RegisterForm from "../../components/RegisterForm";
 import kenzieHubApi from "../../services/kenzieHubApi";
@@ -19,7 +20,7 @@ import {
 const KenzieHubLogo: string =
   require("../../assets/img/KenzieHubLogo.svg").default;
 
-const Register = () => {
+const Register = (): JSX.Element => {
   const navigate = useNavigate();
   const { setUser, loading } = useUserContext();
 
@@ -46,7 +47,7 @@ const Register = () => {
 
             navigate("/home", { replace: true });
           })
-          .catch((err) => console.log(err));
+          .catch((err: AxiosError) => console.log(err));
       }
     }
 

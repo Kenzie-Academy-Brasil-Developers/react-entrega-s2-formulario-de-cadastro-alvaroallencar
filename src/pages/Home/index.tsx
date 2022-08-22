@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { IoMdAddCircle } from "react-icons/io";
 import { motion } from "framer-motion";
 
@@ -14,6 +15,7 @@ import {
   WelcomeMessageDiv,
   UserModuleDiv,
   TechsHeader,
+  NothingHere,
 } from "./styles";
 
 const KenzieHubLogo: string =
@@ -60,10 +62,10 @@ const Home = () => {
         </button>
       </TechsHeader>
 
-      {user.techs.length > 0 ? (
+      {user.techs && user.techs.length > 0 ? (
         <TechsList />
       ) : (
-        <p style={{ color: "white" }}>Nothing here</p>
+        <NothingHere>Nothing here</NothingHere>
       )}
 
       {add && <AddTechModal />}

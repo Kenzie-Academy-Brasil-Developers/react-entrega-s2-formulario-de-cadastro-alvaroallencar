@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { VscLoading } from "react-icons/vsc";
 import { motion } from "framer-motion";
+import { AxiosError } from "axios";
 
 import LoginForm from "../../components/LoginForm";
 import kenzieHubApi from "../../services/kenzieHubApi";
@@ -41,7 +42,7 @@ const Login = () => {
 
             navigate("/home", { replace: true });
           })
-          .catch((err) => console.log(err));
+          .catch((err: AxiosError) => console.log(err));
       }
     }
 
