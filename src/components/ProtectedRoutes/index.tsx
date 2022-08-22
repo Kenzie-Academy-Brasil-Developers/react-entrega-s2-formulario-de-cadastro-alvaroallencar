@@ -1,12 +1,12 @@
-import { useContext } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext";
 import { VscLoading } from "react-icons/vsc";
 
-import { LoadingMessage } from "./protectedRoutes.styles";
+import { useUserContext } from "../../Providers/UserContext";
+
+import { LoadingMessage } from "./styles";
 
 const ProtectedRoutes = () => {
-  const { user, loading } = useContext(UserContext);
+  const { user, loading } = useUserContext();
   const location = useLocation();
 
   if (loading) {

@@ -1,12 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-import Login from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
-import Home from "../pages/Home/Home";
-import ProtectedRoutes from "../components/ProtectedRoutes/ProtectedRoutes";
+import Login from "../../pages/Login";
+import Register from "../../pages/Register";
+import Home from "../../pages/Home";
+import ProtectedRoutes from "../../components/ProtectedRoutes";
 
-const RoutesMain = () => {
+const RoutesMain = (): JSX.Element => {
   return (
     <AnimatePresence>
       <Routes>

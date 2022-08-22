@@ -1,37 +1,37 @@
-import { useContext } from "react";
-import DetailsTechModal from "../DetailsTechModal/DetailsTechModal";
-import { UserContext } from "../../contexts/UserContext";
-import { TechContext } from "../../contexts/TechContext";
+import DetailsTechModal from "../DetailsTechModal";
+import { useUserContext } from "../../Providers/UserContext";
+import { useTechContext } from "../../Providers/TechContext";
 
-import { TechsListWrapper, TechItem } from "./techsList.styles";
+import { TechsListWrapper, TechItem } from "./styles";
 
-const TechsList = () => {
-  const { user } = useContext(UserContext);
+const TechsList = (): JSX.Element => {
+  const { user } = useUserContext();
   const {
     details,
-    techId,
     setTechId,
-    techTitleInput,
     setTechTitleInput,
-    techStatusSelect,
     setTechStatusSelect,
     showDetailsTechModal,
-  } = useContext(TechContext);
+  } = useTechContext();
 
   // sorting techs by most recents:
 
-  user.techs.sort((a, b) => {
+  user.techs.sort((a, b): number => {
     return a.created_at > b.created_at ? -1 : 1;
   });
 
-  const handleClick = (idTech, techTitle, techStatus) => {
+  const handleClick = (
+    idTech: string | number,
+    techTitle: string,
+    techStatus: string
+  ): void => {
     showDetailsTechModal();
     setTechId(idTech);
     setTechTitleInput(techTitle);
     setTechStatusSelect(techStatus);
   };
 
-  const handleTranslate = (status) => {
+  const handleTranslate = (status: string): string => {
     if (status === "Iniciante") {
       return "Beginner";
     } else if (status === "Intermediário") {

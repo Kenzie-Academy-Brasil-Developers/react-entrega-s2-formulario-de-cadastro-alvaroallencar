@@ -1,11 +1,13 @@
-import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { IoMdCloseCircle } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
-import { useContext } from "react";
 
-import { TechContext } from "../../contexts/TechContext";
+import {
+  useTechContext,
+  NewTechForm as INewTechForm,
+} from "../../Providers/TechContext";
 
 import {
   AddTechModalWrapper,
@@ -15,10 +17,10 @@ import {
   TechTitleDiv,
   TechStatusDiv,
   ButtonBoxDiv,
-} from "./addTechModal.styles";
+} from "./styles";
 
-const AddTechModal = () => {
-  const { showAddTechModal, onSubmitNewTech } = useContext(TechContext);
+const AddTechModal = (): JSX.Element => {
+  const { showAddTechModal, onSubmitNewTech } = useTechContext();
 
   const formSchema = yup.object().shape({
     title: yup.string().trim().required("Title required"),
@@ -29,7 +31,7 @@ const AddTechModal = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(formSchema) });
+  } = useForm<INewTechForm>({ resolver: yupResolver(formSchema) });
 
   return (
     <AnimatePresence>

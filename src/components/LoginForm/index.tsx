@@ -1,16 +1,20 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiShow, BiHide } from "react-icons/bi";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { UserContext } from "../../contexts/UserContext";
 
-import { FormDiv, FormLogin, EmailDiv, PasswordDiv } from "./loginForm.styles";
+import {
+  useUserContext,
+  LoginForm as ILoginForm,
+} from "../../Providers/UserContext";
+
+import { FormDiv, FormLogin, EmailDiv, PasswordDiv } from "./styles";
 
 const LoginForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [inputType, setInputType] = useState("password");
-  const { onSubmitLogin } = useContext(UserContext);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [inputType, setInputType] = useState<string>("password");
+  const { onSubmitLogin } = useUserContext();
 
   const formSchema = yup.object().shape({
     email: yup
@@ -25,17 +29,17 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ILoginForm>({
     resolver: yupResolver(formSchema),
   });
 
-  const displayPassword = (e) => {
+  const displayPassword = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     setShowPassword(!showPassword);
     setInputType("text");
   };
 
-  const hidePassword = (e) => {
+  const hidePassword = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     setShowPassword(!showPassword);
     setInputType("password");

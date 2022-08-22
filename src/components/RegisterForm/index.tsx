@@ -1,18 +1,21 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
+
+import {
+  useUserContext,
+  RegisterForm as IRegisterForm,
+} from "../../Providers/UserContext";
 
 import {
   RegisterFormWrapper,
   TitleDiv,
   FormRegister,
   InputContainer,
-} from "./registerForm.styles";
+} from "./styles";
 
-const RegisterForm = () => {
-  const { onSubmitRegister } = useContext(UserContext);
+const RegisterForm = (): JSX.Element => {
+  const { onSubmitRegister } = useUserContext();
 
   const formSchema = yup.object().shape({
     name: yup.string().trim().required("Name required"),
@@ -43,7 +46,7 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IRegisterForm>({
     resolver: yupResolver(formSchema),
   });
 
@@ -152,7 +155,7 @@ const RegisterForm = () => {
         </InputContainer>
         <InputContainer>
           <label htmlFor="registerModule">Contact</label>
-          <select name="" id="registerModule" {...register("course_module")}>
+          <select id="registerModule" {...register("course_module")}>
             <option value="First Module">First Module</option>
             <option value="Second Module">Second Module</option>
             <option value="Third Module">Third Module</option>

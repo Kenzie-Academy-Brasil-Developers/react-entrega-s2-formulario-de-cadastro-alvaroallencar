@@ -1,10 +1,10 @@
-import { useContext } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { motion } from "framer-motion";
-import { UserContext } from "../../contexts/UserContext";
-import { TechContext } from "../../contexts/TechContext";
-import TechsList from "../../components/TechsList/TechsList";
-import AddTechModal from "../../components/AddTechModal/AddTechModal";
+
+import { useUserContext } from "../../Providers/UserContext";
+import { useTechContext } from "../../Providers/TechContext";
+import TechsList from "../../components/TechsList";
+import AddTechModal from "../../components/AddTechModal";
 
 import {
   HomePageWrapper,
@@ -14,13 +14,14 @@ import {
   WelcomeMessageDiv,
   UserModuleDiv,
   TechsHeader,
-} from "./home.styles";
+} from "./styles";
 
-import KenzieHubLogo from "../../assets/img/KenzieHubLogo.svg";
+const KenzieHubLogo: string =
+  require("../../assets/img/KenzieHubLogo.svg").default;
 
 const Home = () => {
-  const { user, handleSignOut } = useContext(UserContext);
-  const { add, showAddTechModal } = useContext(TechContext);
+  const { user, handleSignOut } = useUserContext();
+  const { add, showAddTechModal } = useTechContext();
 
   return (
     <HomePageWrapper

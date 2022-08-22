@@ -1,10 +1,13 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { motion } from "framer-motion";
-import { TechContext } from "../../contexts/TechContext";
+
+import {
+  useTechContext,
+  EditTechForm as IEditTechForm,
+} from "../../Providers/TechContext";
 
 import {
   DetailsTechModalWrapper,
@@ -14,20 +17,17 @@ import {
   TechTitleDiv,
   TechStatusDiv,
   ButtonBoxDiv,
-} from "./detailsTechModal.styles";
+} from "./styles";
 
-const DetailsTechModal = () => {
+const DetailsTechModal = (): JSX.Element => {
   const {
-    techId,
-    setTechId,
     techTitleInput,
-    setTechTitleInput,
     techStatusSelect,
     setTechStatusSelect,
     showDetailsTechModal,
     onSubmitEdit,
     deleteTech,
-  } = useContext(TechContext);
+  } = useTechContext();
 
   const formSchema = yup.object().shape({
     status: yup.string().required("Technology status required"),
@@ -37,7 +37,7 @@ const DetailsTechModal = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(formSchema) });
+  } = useForm<IEditTechForm>({ resolver: yupResolver(formSchema) });
 
   return (
     <DetailsTechModalWrapper
@@ -65,21 +65,14 @@ const DetailsTechModal = () => {
               value={techTitleInput}
               placeholder="Your technology here"
             />
-            {errors.title?.message ? (
-              <p>{errors.title?.message}</p>
-            ) : (
-              <p>
-                <br />
-              </p>
-            )}
           </TechTitleDiv>
           <TechStatusDiv>
             <label htmlFor="technologyStatus">Status</label>
             <select
               id="technologyStatus"
               defaultValue={techStatusSelect}
-              onChange={(e) => setTechStatusSelect(e.target.value)}
               {...register("status")}
+              onChange={(e) => setTechStatusSelect(e.target.value)}
             >
               <option value="Iniciante">Beginner</option>
               <option value="Intermediário">Intermediary</option>
